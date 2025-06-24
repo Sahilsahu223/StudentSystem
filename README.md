@@ -29,5 +29,27 @@ A full-stack web application for managing student data, built using **Spring Boo
 - Bootstrap or TailwindCSS (for styling)
 
 ---
+## 🧪 Testing
+
+This project includes **comprehensive testing** using:
+
+- ✅ **JUnit 5** for unit & integration testing  
+- ✅ **MockMvc** for simulating HTTP requests  
+- ✅ **Mockito** for mocking repository behavior  
+- ✅ **JaCoCo** for measuring code coverage  
+
+### 🧩 Unit Tests
+Focused on:
+- Controller behavior (`StudentController`)
+- Edge cases and error paths (e.g., 404 not found, validation)
+
+### 🔗 Integration Tests
+Simulate actual HTTP calls to endpoints with:
+- `@SpringBootTest`
+- `@AutoConfigureMockMvc`
+
+### 📈 Code Coverage
+Generated via **JaCoCo**, viewable at:
+target/site/jacoco/index.html
 
 
