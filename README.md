@@ -46,10 +46,12 @@ Focused on:
 ### 🔗 Integration Tests
 Simulate actual HTTP calls to endpoints with:
 - `@SpringBootTest`
-- `@AutoConfigureMockMvc`
+
 
 ### 📈 Code Coverage
 Generated via **JaCoCo**, viewable at:
 target/site/jacoco/index.html
 
+- `@AutoConfigureM![Screenshot 2025-06-29 185151](https://github.com/user-attachments/assets/cd563bc1-fa1a-4de2-b75e-8ace500eece8)
+ockMvc`
 
