@@ -42,7 +42,6 @@ This project includes **comprehensive testing** using:
 Focused on:
 - Controller behavior (`StudentController`)
 - Edge cases and error paths (e.g., 404 not found, validation)
-
 ### 🔗 Integration Tests
 Simulate actual HTTP calls to endpoints with:
 - `@SpringBootTest`
@@ -51,3 +50,6 @@ Simulate actual HTTP calls to endpoints with:
 ### 📈 Code Coverage
 Generated via **JaCoCo**, viewable at:
 target/site/jacoco/index.html
+
+
+![Alt text](image.png)
