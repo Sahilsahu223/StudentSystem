@@ -64,7 +64,7 @@ jobs:
           KEPLOY_API_KEY: ${{ secrets.KEPLOY_API_KEY }}
         run: |
           keploy test-suite \
-            --app=YOUR_APP_ID_HERE \
+            --app= 675d8e49-a11a-4d8b-b7a9-409ea91d611d \
             --base-path=http://localhost:8080/api/student \
             --cloud
 
