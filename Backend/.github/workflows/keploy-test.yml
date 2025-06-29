@@ -10,6 +10,10 @@ jobs:
   keploy-cloud-tests:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: backend  # 👈 sets correct path for Maven
+
     services:
       mysql:
         image: mysql:5.7
@@ -25,41 +29,45 @@ jobs:
           --health-retries=10
 
     steps:
-    - name: 📥 Checkout Code
-      uses: actions/checkout@v3
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v3
 
-    - name: ☕ Set up Java 17
-      uses: actions/setup-java@v3
-      with:
-        distribution: temurin
-        java-version: '17'
+      - name: ☕ Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: '17'
 
-    - name: 📦 Install Maven
-      uses: stCarolas/setup-maven@v4
-      with:
-        maven-version: '3.9.6'
+      - name: 📦 Install Maven
+        uses: stCarolas/setup-maven@v4
+        with:
+          maven-version: '3.9.6'
 
-    - name: 📦 Build Spring Boot App
-      run: mvn clean package -DskipTests
+      - name: 📦 Build Spring Boot App
+        run: mvn clean package -DskipTests
 
-    - name: 🚀 Start Spring Boot App with MySQL
-      env:
-        SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/student_db
-        SPRING_DATASOURCE_USERNAME: root
-        SPRING_DATASOURCE_PASSWORD: root
-      run: |
-        nohup java -jar target/*.jar > app.log 2>&1 &
-        sleep 25
+      - name: 🚀 Start Spring Boot App with MySQL
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/student_db
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: root
+        run: |
+          nohup java -jar target/*.jar > app.log 2>&1 &
+          sleep 25
 
-    - name: 🐰 Install Keploy Enterprise CLI
-      run: |
-        curl --silent -L https://keploy.io/ent/install.sh | bash
+      - name: 🐰 Install Keploy Enterprise CLI
+        run: |
+          curl --silent -L https://keploy.io/ent/install.sh | bash
 
-    - name: 🔁 Run Keploy Cloud Test Suite
-      env:
-        KEPLOY_API_KEY: ${{ secrets.KEPLOY_API_KEY }}
-      run: |
-        keploy test-suite \
-          --app=YOUR_APP_ID_HERE \
-          --base-path=http://localhost:8080/api/student \
-          --cloud
+      - name: 🔁 Run Keploy Cloud Test Suite
+        env:
+          KEPLOY_API_KEY: ${{ secrets.KEPLOY_API_KEY }}
+        run: |
+          keploy test-suite \
+            --app=YOUR_APP_ID_HERE \
+            --base-path=http://localhost:8080/api/student \
+            --cloud
+
+      - name: 📄 Output logs (for debugging if needed)
+        if: always()
+        run: cat app.log
