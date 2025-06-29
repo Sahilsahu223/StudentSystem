@@ -1,8 +1,25 @@
-steps:
--name: Install Keploy CLI
- run: | 
-    curl --silent -L https://keploy.io/ent/install.sh | bash
+name: 🐰 Keploy API Test
 
--name: Run Keploy Test Suite
- run: |
-    export KEPLOY_API_KEY=FUJs/qxWAwf/F9QXMQ== && keploy test-suite --app=675d8e49-a11a-4d8b-b7a9-409ea91d611d --base-path http://localhost:8080/api --cloud
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  keploy-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: ☕ Set up Java 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: '17'
+
+
+    - name: 🐰 Install Keploy CLI
+      run: curl -s https://raw.githubusercontent.com/keploy/keploy/main/install.sh | bash
+    - name: Run Keploy Test Suite
+      run: |
+       export KEPLOY_API_KEY=${{ secrets.KEPLOY_API_KEY }}&& keploy test-suite --app=675d8e49-a11a-4d8b-b7a9-409ea91d611d --base-path http://localhost:8080/api --cloud
