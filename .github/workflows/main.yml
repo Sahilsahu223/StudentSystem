@@ -21,8 +21,7 @@ jobs:
           java-version: '17'
 
       - name: 📦 Build Spring Boot App
-        run: ./mvnw clean package -DskipTests
-
+        run: mvn clean package -DskipTests
       - name: 🚀 Start Spring Boot App (in background)
         run: |
           nohup java -jar target/*.jar > app.log 2>&1 &
@@ -40,7 +39,3 @@ jobs:
             --app=YOUR_APP_ID_HERE \
             --base-path=http://localhost:8080/api/student \
             --cloud
-
-      - name: 📄 Output logs (for debugging if needed)
-        if: always()
-        run: cat app.log
