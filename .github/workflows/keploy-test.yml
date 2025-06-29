@@ -12,7 +12,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: backend  # 👈 sets correct path for Maven
+        working-directory: Backend  # 👈 sets correct path for Maven
 
     services:
       mysql:
