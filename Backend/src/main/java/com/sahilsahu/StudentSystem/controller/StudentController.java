@@ -4,52 +4,59 @@ import com.sahilsahu.StudentSystem.exception.StudentNotFoundException;
 import com.sahilsahu.StudentSystem.model.Student;
 import com.sahilsahu.StudentSystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
+@RequestMapping("/api")  // Optional: groups all endpoints under /api
 @CrossOrigin("http://localhost:3000")
 public class StudentController {
+
     @Autowired
     private StudentRepository studentRepository;
 
+    // POST /api/student
     @PostMapping("/student")
-    Student newStudent(@RequestBody Student newStudent) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Student newStudent(@RequestBody Student newStudent) {
         return studentRepository.save(newStudent);
     }
+
+    // GET /api/students
     @GetMapping("/students")
-    List<Student> getAllStudents() {
+    public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
+    // GET /api/student/{id}
     @GetMapping("/student/{id}")
-    Student getStudentById(@PathVariable Long id) {
-        return studentRepository.findById(Math.toIntExact(id))
+    public Student getStudentById(@PathVariable int id) {
+        return studentRepository.findById(id)
                 .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
+    // PUT /api/student/{id}
     @PutMapping("/student/{id}")
-    Student updateStudent(@RequestBody Student newStudent, @PathVariable Long id) {
-        return studentRepository.findById(Math.toIntExact(id))
-                .map(user -> {
-                    user.setAddress(newStudent.getAddress());
-                    user.setName(newStudent.getName());
-                    user.setEmail(newStudent.getEmail());
-                    return studentRepository.save(user);
+    public Student updateStudent(@RequestBody Student newStudent, @PathVariable int id) {
+        return studentRepository.findById(id)
+                .map(student -> {
+                    student.setName(newStudent.getName());
+                    student.setEmail(newStudent.getEmail());
+                    student.setAddress(newStudent.getAddress());
+                    return studentRepository.save(student);
                 }).orElseThrow(() -> new StudentNotFoundException(id));
     }
 
+    // DELETE /api/student/{id}
     @DeleteMapping("/student/{id}")
-    String deleteUser(@PathVariable Long id){
-        if(!studentRepository.existsById(Math.toIntExact(id))){
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable int id) {
+        if (!studentRepository.existsById(id)) {
             throw new StudentNotFoundException(id);
         }
-        studentRepository.deleteById(Math.toIntExact(id));
-        return  "User with id "+id+" has been deleted success.";
+        studentRepository.deleteById(id);
     }
-
-
-
 }
+

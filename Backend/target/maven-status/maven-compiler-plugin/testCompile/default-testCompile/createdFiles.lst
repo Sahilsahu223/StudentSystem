@@ -1,1 +1,3 @@
-com\sahilsahu\StudentSystem\StudentSystemApplicationTests.class
+com\sahilsahu\StudentSystem\controller\StudentControllerTest.class
+com\sahilsahu\StudentSystem\StudentSystemTest.class
+com\sahilsahu\StudentSystem\StudentIntegrationTest.class

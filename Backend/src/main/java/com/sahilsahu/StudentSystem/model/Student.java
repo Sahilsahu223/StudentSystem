@@ -10,16 +10,24 @@ public class Student {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
     private String name;
     private String address;
     private String email;
+    public Student(){
 
-    public Long getId() {
+    }
+    public Student(int id, String name, String email, String address) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
