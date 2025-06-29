@@ -18,8 +18,9 @@ jobs:
         java-version: '17'
 
 
-    - name: 🐰 Install Keploy CLI
-      run: curl -s https://raw.githubusercontent.com/keploy/keploy/main/install.sh | bash
+    - name: Install Keploy CLI
+      run: |
+        curl --silent -L https://keploy.io/ent/install.sh | bash    
     - name: Run Keploy Test Suite
       run: |
        export KEPLOY_API_KEY=${{ secrets.KEPLOY_API_KEY }}&& keploy test-suite --app=675d8e49-a11a-4d8b-b7a9-409ea91d611d --base-path http://localhost:8080/api --cloud
