@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // The base URL of your Spring Boot API
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080/api";
 
 class StudentService {
 
@@ -32,4 +32,5 @@ class StudentService {
 }
 
 // Export an object of the class
+
 export default new StudentService();
