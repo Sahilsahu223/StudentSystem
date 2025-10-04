@@ -1,38 +1,176 @@
-.App {
-  text-align: center;
+/* ============================================= */
+/* MODERN DARK THEME STYLES             */
+/* ============================================= */
+
+/* 1. Define Color Palette and Global Styles */
+:root {
+    --bg-color: #1a1a1d;        /* Dark Charcoal for the page background */
+    --surface-color: #2c2c31;   /* Slightly lighter gray for containers */
+    --primary-color: #4a90e2;   /* A modern, pleasant blue for accents */
+    --primary-hover: #5aa1f2;
+    --text-primary: #f5f5f5;    /* Off-white for primary text */
+    --text-secondary: #a9a9b3;  /* Lighter gray for secondary text/placeholders */
+    --border-color: #404044;
+    --delete-color: #e57373;    /* A softer red for delete actions */
+    --delete-hover: #ef9a9a;
+    --edit-color: #ffb74d;      /* A warm amber for edit actions */
+    --edit-hover: #ffcc80;
+    --cancel-color: #6c757d;
+    --cancel-hover: #868e96;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* 2. Main Container and Headings */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--surface-color);
+    padding: 30px 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+    color: var(--text-primary);
+    text-align: center;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+h2 {
+    color: var(--primary-color);
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* 3. Form and Input Styling */
+.form-container {
+    margin-bottom: 40px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    padding: 12px 15px;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input::placeholder {
+    color: var(--text-secondary);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+}
+
+/* 4. Button Styling */
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Primary Button (Add/Update) */
+button[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+}
+button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
+}
+
+/* Specific Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+.delete-btn {
+    background-color: var(--delete-color);
+    color: var(--bg-color);
+}
+.delete-btn:hover {
+    background-color: var(--delete-hover);
+}
+
+.edit-btn {
+    background-color: var(--edit-color);
+    color: var(--bg-color);
+}
+.edit-btn:hover {
+    background-color: var(--edit-hover);
+}
+
+.cancel-btn {
+    background-color: var(--cancel-color);
+    color: var(--text-primary);
+}
+.cancel-btn:hover {
+    background-color: var(--cancel-hover);
+}
+
+
+/* 5. Table Styling */
+.student-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+table th {
+    background-color: var(--bg-color);
+    color: var(--text-secondary);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+table tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+table tr:hover {
+    background-color: #3a3a40; /* Slightly lighter surface for hover */
 }
