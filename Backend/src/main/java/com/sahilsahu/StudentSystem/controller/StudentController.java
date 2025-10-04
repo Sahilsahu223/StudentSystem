@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")  // Optional: groups all endpoints under /api
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://your-future-netlify-app-url.netlify.app"})
 public class StudentController {
 
     @Autowired
